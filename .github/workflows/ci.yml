@@ -1,0 +1,37 @@
+name: Java CI with Maven
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Set up JDK 21
+      uses: actions/setup-java@v4
+      with:
+        java-version: '21'
+        distribution: 'temurin'
+        cache: maven
+        
+    # Example Build Step targeting a specific Maven project (e.g., the Clock App)
+    # Since this repository contains multiple disconnected projects, we verify a core one.
+    - name: Build Clock Application with Maven
+      run: |
+        cd "semester 2/Advanced Programing Workshop/clock"
+        mvn -B package --file pom.xml
+        
+    # Example Build Step targeting another core project (e.g., the Mario App)
+    - name: Build Mario Application with Maven
+      run: |
+        cd "semester 2/Advanced Programing Workshop/mario"
+        mvn -B package --file pom.xml
+
+    # Note: If unit tests existed, mvn test would be added here.

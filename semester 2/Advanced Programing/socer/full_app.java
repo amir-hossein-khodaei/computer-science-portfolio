@@ -1,0 +1,305 @@
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+
+        
+        List<player> players = new ArrayList<>();
+        List<team> teams = new ArrayList<>();
+        Scanner scanner = new Scanner(System.in);
+
+        repeat:
+        while (true) {
+
+            String[] input = scanner.nextLine().split("\\s+");
+
+            sweech:
+            switch (input[0]) {
+                case "\n", " ", "": {
+                    continue;
+                }
+
+                case "new": {
+                    switch (input[1]) {
+                        case "player": {
+                            players.add(new player(input[3], input[4], input[5], input[6]));
+                            break sweech;
+                        }
+                        case "team": {
+                            teams.add(new team(input[2], input[3]));
+                            break sweech;
+                        }
+                        default: {
+                            System.out.println("not valid 1");
+                            break sweech;
+                        }
+                    }
+                }
+
+                case "buy": {
+                    if (players.size() < Integer.parseInt(input[1])) {
+                        System.out.println("player with the id playerID doesnt exist");
+                        break;
+                    } else if (teams.size() < Integer.parseInt((input[2]))) {
+                        System.out.println("team with the id teamID doesnt exist");
+                        break;
+                    } else if (!(teams.get(Integer.parseInt(input[2]) - 1).can_effort(players.get(Integer.parseInt(input[1]) - 1)))) {
+                        System.out.println("the team cant afford to buy this player ");
+                        break;
+                    } else if (!(players.get(Integer.parseInt(input[1]) - 1).isFree())) {
+                        System.out.println("player already has a team");
+                        break;
+                    }
+
+                    teams.get(Integer.parseInt(input[2]) - 1).remove_money(players.get(Integer.parseInt(input[1]) - 1));
+                    teams.get(Integer.parseInt(input[2]) - 1).setPlayers(players.get(Integer.parseInt(input[1]) - 1));
+                    players.get(Integer.parseInt(input[1]) - 1).buy();
+                    System.out.println("player added to the team succesfully");
+                    break;
+
+                }
+
+                case "sell": {
+                    if (teams.size() < Integer.parseInt((input[2]))) {
+                        System.out.println("team with the id teamID doesnt exist");
+                        break;
+                    }
+                    else if (players.size() < Integer.parseInt(input[1])) {
+                        System.out.println("team doesnt have this player");
+                        break;
+                    }
+                    else if (!((teams.get(Integer.parseInt(input[2]) - 1).containplayer(players.get(Integer.parseInt(input[1]) - 1))))) {
+                        System.out.println("team doesnt have this player");
+                        break;
+                    } else {
+                        teams.get(Integer.parseInt(input[2]) - 1).add_money(players.get(Integer.parseInt(input[1]) - 1));
+                        teams.get(Integer.parseInt(input[2]) - 1).removePlayers(players.get(Integer.parseInt(input[1]) - 1));
+                        players.get(Integer.parseInt(input[1]) - 1).sell();
+                        System.out.println("player sold succesfully");
+                        break;
+                    }
+                }
+
+                case "match": {
+                    if (!((teams.size() >= Integer.parseInt(input[1])) && (teams.size() >= Integer.parseInt(input[2])))) {
+                        System.out.println("team doesnt exist");
+                        break;
+                    }
+                    else if (!(teams.get(Integer.parseInt(input[1]) - 1).is_verified() && teams.get(Integer.parseInt(input[2]) - 1).is_verified())) {
+                        System.out.println("the game can not be held due to loss of the players");
+                        break;
+                    }
+                    else {
+                        if (teams.get(Integer.parseInt(input[1]) - 1).count_power() > teams.get(Integer.parseInt(input[2]) - 1).count_defence()) {
+                            teams.get(Integer.parseInt(input[1]) - 1).winer();
+                            teams.get(Integer.parseInt(input[2]) - 1).losser();
+                            break;
+                        } else if (teams.get(Integer.parseInt(input[1]) - 1).count_power() > teams.get(Integer.parseInt(input[2]) - 1).count_defence()) {
+                            teams.get(Integer.parseInt(input[2]) - 1).winer();
+                            teams.get(Integer.parseInt(input[1]) - 1).losser();
+                            break;
+                        }
+                    }
+                    break;
+                }
+
+                case "rank": {
+                    List<team> sorted_team = sorter(teams);
+                    int j = 0;
+                    for (team k : sorted_team) {
+                        j++;
+                        System.out.println(j + ". " + k.getName());
+                    }
+                    break;
+                }
+
+                case "end": {
+                    break repeat;
+                }
+
+                default: {
+                    System.out.println("not valid 2 ");
+                    break;
+                }
+
+            }
+        }
+    }
+
+    public static List<team> sorter(List<team> teams) {
+        List<team> all_teams = teams;
+        int n = all_teams.size();
+        for (int i = 0; i < n - 1; i++) {
+            for (int j = 0; j < n - i - 1; j++) {
+                if (all_teams.get(j).getWin() < all_teams.get(j + 1).getWin()) {
+
+
+                    team temp = all_teams.get(j);
+                    all_teams.set(j, all_teams.get(j + 1));
+                    all_teams.set(j + 1, temp);
+
+                } else if (all_teams.get(j).getWin() == all_teams.get(j + 1).getWin()) {
+
+                    if (all_teams.get(j).getLose() > all_teams.get(j + 1).getLose()) {
+
+
+                        team temp = all_teams.get(j);
+                        all_teams.set(j, all_teams.get(j + 1));
+                        all_teams.set(j + 1, temp);
+
+                    }
+                }
+            }
+        }
+        return all_teams;
+    }
+}
+class player {
+    private final int price;
+    private final int speed;
+    private final int finishing;
+    private final int defence;
+    private boolean free;
+
+
+    public player(String s, String s1, String s2, String s3) {
+        this.price = Integer.parseInt(s);
+        this.speed = Integer.parseInt(s1);
+        this.defence = Integer.parseInt(s3);
+        this.finishing = Integer.parseInt(s2);
+        this.free = true;
+    }
+
+    public int getSpeed() {
+        return speed;
+    }
+
+    public int getFinishing() {
+        return finishing;
+    }
+
+    public int getDefence() {
+        return defence;
+    }
+
+    public boolean isFree() {
+        return this.free;
+    }
+
+    public void buy() {
+        this.free = false;
+    }
+
+    public void sell() {
+        this.free = true;
+    }
+
+    public int getPrice() {
+        return this.price;
+    }
+
+}
+class team {
+    private static int counter = 0;
+    private final String name;
+    private final int ID;
+    List<player> players = new ArrayList<>();
+    private int money;
+    private int win;
+    private int loss;
+
+    public team(String name, String money) {
+        this.money = Integer.parseInt(money);
+        this.name = name;
+        this.win = 0;
+        this.loss = 0;
+        this.ID = ++counter;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public int getID() {
+        return ID;
+    }
+
+    public boolean can_effort(player player) {
+        return (this.money >= player.getPrice());
+    }
+
+    public void add_money(player player) {
+        this.money = this.money + player.getPrice();
+    }
+    public int getmoney() {
+        return this.money ;
+    }
+
+    public void remove_money(player player) {
+        this.money = this.money - player.getPrice();
+    }
+
+    public int return_money() {
+        return this.money;
+    }
+
+    public List<player> getPlayers() {
+        return players;
+    }
+
+    public void setPlayers(player players) {
+        this.players.add(players);
+    }
+
+    public void removePlayers(player players) {
+        this.players.remove(players);
+    }
+
+    public boolean containplayer(player player) {
+        return players.contains(player);
+    }
+
+    public boolean is_verified() {
+        return (this.players.size() >= 11);
+    }
+
+    public void winer() {
+        this.win++;
+        this.money = this.money + 1000;
+    }
+
+    public void losser() {
+        this.loss++;
+    }
+
+    public int getWin() {
+        return win;
+    }
+
+    public void setWin(int win) {
+        this.win = win;
+    }
+
+    public int getLose() {
+        return loss;
+    }
+
+    public int count_power() {
+        int powers = 0;
+        for (int i = 0; i < 11; i++) {
+            powers += (players.get(i).getSpeed() + players.get(i).getFinishing());
+        }
+        return powers;
+    }
+
+    public int count_defence() {
+        int powers = 0;
+        for (int i = 0; i < 11; i++) {
+            powers += (players.get(i).getSpeed() + players.get(i).getDefence());
+        }
+        return powers;
+    }
+
+}

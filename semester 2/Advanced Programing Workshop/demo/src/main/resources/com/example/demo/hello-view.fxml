@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+
+<Pane fx:id="plane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo.HelloController">
+   <children>
+      <Label layoutX="104.0" layoutY="65.0" text="name :" />
+      <Label layoutX="108.0" layoutY="114.0" text="color" />
+      <Label layoutX="108.0" layoutY="169.0" text="x" />
+      <Label layoutX="100.0" layoutY="210.0" text="y" />
+      <Label layoutX="107.0" layoutY="275.0" text="Width" />
+      <Label layoutX="107.0" layoutY="326.0" text="Height" />
+      <ColorPicker fx:id="cp_color" layoutX="178.0" layoutY="110.0" />
+      <Spinner fx:id="spiner_x" layoutX="178.0" layoutY="271.0" opacity="0.34" />
+      <Slider fx:id="slider_y" layoutX="183.0" layoutY="220.0" majorTickUnit="5.0" prefHeight="37.0" prefWidth="453.0" showTickLabels="true" showTickMarks="true" />
+      <Spinner fx:id="spiner_y" layoutX="178.0" layoutY="322.0">
+         <opaqueInsets>
+            <Insets top="10.0" />
+         </opaqueInsets></Spinner>
+      <Slider fx:id="slider_x" layoutX="183.0" layoutY="179.0" majorTickUnit="5.0" prefHeight="37.0" prefWidth="453.0" showTickLabels="true" showTickMarks="true" />
+      <TextField fx:id="tx_name" layoutX="178.0" layoutY="61.0" />
+      <Button fx:id="butten" layoutX="324.0" layoutY="483.0" mnemonicParsing="false" onAction="#butten" text="ok" />
+      <Rectangle fx:id="morabai" arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="56.0" layoutX="39.0" layoutY="14.0" stroke="WHITE" strokeType="INSIDE" width="62.0" />
+      <Label fx:id="moraba_text" layoutX="56.0" layoutY="33.0" />
+   </children>
+</Pane>

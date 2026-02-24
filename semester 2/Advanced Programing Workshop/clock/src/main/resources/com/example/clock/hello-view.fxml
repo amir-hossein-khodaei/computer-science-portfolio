@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Spinner?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<Pane fx:id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1080.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.clock.HelloController">
+   <children>
+      <Spinner fx:id="minuts" layoutX="504.0" layoutY="593.0" prefHeight="25.0" prefWidth="73.0" />
+      <Spinner fx:id="hours" layoutX="361.0" layoutY="593.0" prefHeight="25.0" prefWidth="55.0" />
+      <Spinner fx:id="seconds" layoutX="643.0" layoutY="593.0" prefHeight="25.0" prefWidth="73.0" />
+      <Label layoutX="463.0" layoutY="571.0" prefHeight="62.0" prefWidth="16.0" text=":" textAlignment="CENTER">
+         <font>
+            <Font size="38.0" />
+         </font>
+      </Label>
+      <Label layoutX="610.0" layoutY="571.0" prefHeight="62.0" prefWidth="16.0" text=":" textAlignment="CENTER">
+         <font>
+            <Font size="38.0" />
+         </font>
+      </Label>
+      <Button fx:id="stopwatch_button" layoutX="428.0" layoutY="654.0" mnemonicParsing="false" text="stopwatch" />
+      <Button fx:id="timer_button" layoutX="591.0" layoutY="654.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="70.0" text="timer" />
+   </children>
+</Pane>
