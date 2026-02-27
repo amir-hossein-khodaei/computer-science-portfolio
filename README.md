@@ -307,7 +307,7 @@ Distributed under the MIT License. See `LICENSE` for more information.
 
 ## 📬 Contact & Acknowledgments
 
-**Project Author**: [Amkhodaei83](https://github.com/Amkhodaei83)
+**Project Author**: [amir-hossein-khodae](https://github.com/amir-hossein-khodae)
 
 ### Acknowledgments
 
