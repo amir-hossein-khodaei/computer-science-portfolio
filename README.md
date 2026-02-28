@@ -13,12 +13,12 @@
 ![JavaFX Framework Badge](https://img.shields.io/badge/JavaFX-FF0000?style=for-the-badge&logo=javafx&logoColor=white)
 <!-- ASSUMPTION: Adding an MIT License badge as it is the industry standard for developer portfolios to allow recruiters/peers to safely review the code. -->
 ![MIT Open Source License Badge](https://img.shields.io/badge/License-MIT-blue.svg?style=for-the-badge)
-![Repository Size Badge](https://img.shields.io/github/repo-size/Amkhodaei83/University-Activity?style=for-the-badge)
+![Repository Size Badge](https://img.shields.io/github/repo-size/amir-hossein-khodaei/computer-science-portfolio?style=for-the-badge)
 
 <br>
 
 <!-- Action Buttons -->
-[**Explore Projects**](#-about-the-project) · [**View Source Code**](https://github.com/Amkhodaei83/University-Activity) · [**Report Bug**](https://github.com/Amkhodaei83/University-Activity/issues)
+[**Explore Projects**](#-about-the-project) · [**View Source Code**](https://github.com/amir-hossein-khodaei/computer-science-portfolio) · [**Report Bug**](https://github.com/amir-hossein-khodaei/computer-science-portfolio/issues)
 
 </div>
 
@@ -140,10 +140,10 @@ Before cloning the repository, ensure your development environment is equipped w
 ### 🛠️ Installation & Setup
 
 1. **Clone the repository** to your local machine:
-   <kbd>git clone https://github.com/Amkhodaei83/University-Activity.git</kbd>
+   <kbd>git clone https://github.com/amir-hossein-khodaei/computer-science-portfolio.git</kbd>
 
 2. **Navigate to the project directory**:
-   <kbd>cd University-Activity</kbd>
+   <kbd>cd computer-science-portfolio</kbd>
 
 3. **Running the JavaFX Projects (Maven)**
    To execute any of the advanced GUI projects (e.g., the `clock` app):
